@@ -12,6 +12,7 @@ Candidates = Candidate.create([{name:'Faker::Name.name'}, {name:'Faker::Name.nam
 Applications = Application.create([{job_id: 1, candidate_id: 1},{job_id: 2, candidate_id:2},{job_id: 3, candidate_id: 3}])
 Stages = Stage.create([{name: "interview"}, {name: "pre-screen"}, {name: "consider"}])
 JobStages = JobStage.create([{job_id: 1, stage_id: 1}, {job_id: 2, stage_id: 1}, {job_id: 3, stage_id: 3}, {job_id: 3, stage_id: 2}, {job_id: 3, stage_id: 1}])
+Users = User.create([{email:'Faker::Internet.email', company_id: 1, password: "cheese"},{email:'Faker::Internet.email', company_id: 2, password: "cheese"},{email:'Faker::Internet.email', company_id: 3,password: "cheese"}])
 
 Application.create(
   job_id:
