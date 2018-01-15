@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  belongs_to :company
+  belongs_to :user
   has_many :applications
   has_many :candidates, through: :applications
   has_many :job_stages

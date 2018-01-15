@@ -16,13 +16,11 @@ ActiveRecord::Schema.define(version: 20180109201751) do
   enable_extension "plpgsql"
 
   create_table "applications", force: :cascade do |t|
-    t.bigint "company_id"
     t.bigint "candidate_id"
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["candidate_id"], name: "index_applications_on_candidate_id"
-    t.index ["company_id"], name: "index_applications_on_company_id"
     t.index ["job_id"], name: "index_applications_on_job_id"
   end
 
@@ -49,12 +47,12 @@ ActiveRecord::Schema.define(version: 20180109201751) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.bigint "company_id"
+    t.bigint "user_id"
     t.text "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -73,10 +71,9 @@ ActiveRecord::Schema.define(version: 20180109201751) do
   end
 
   add_foreign_key "applications", "candidates"
-  add_foreign_key "applications", "companies"
   add_foreign_key "applications", "jobs"
   add_foreign_key "job_stages", "jobs"
   add_foreign_key "job_stages", "stages"
-  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "users"
   add_foreign_key "users", "companies"
 end
