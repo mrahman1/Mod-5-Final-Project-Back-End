@@ -25,10 +25,12 @@ ActiveRecord::Schema.define(version: 20180109201751) do
   end
 
   create_table "candidates", force: :cascade do |t|
+    t.bigint "user_id"
     t.text "name"
     t.text "link_to_resume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_candidates_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180109201751) do
 
   add_foreign_key "applications", "candidates"
   add_foreign_key "applications", "jobs"
+  add_foreign_key "candidates", "users"
   add_foreign_key "job_stages", "jobs"
   add_foreign_key "job_stages", "stages"
   add_foreign_key "jobs", "users"

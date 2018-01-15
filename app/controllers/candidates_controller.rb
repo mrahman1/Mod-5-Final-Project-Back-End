@@ -45,7 +45,11 @@ class CandidatesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
+
     def candidate_params
-      params.fetch(:candidate, {})
+      params.require(:candidate).permit(:user_id, :name)
     end
+
+
+
 end
