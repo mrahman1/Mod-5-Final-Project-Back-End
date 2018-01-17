@@ -12,7 +12,7 @@ class AuthController < ApplicationController
         id: user.id,
         jwt: issue_token(user.id),
         candidates: user.candidates,
-        jobs: user.jobs
+        jobs: user.jobs, include: '**' 
       }
     else
       render json: {error: 'Password is invalid'}, status: 401
@@ -26,7 +26,7 @@ class AuthController < ApplicationController
         id: current_user.id,
         email: current_user.email,
         candidates: current_user.candidates,
-        jobs: current_user.jobs
+        jobs: current_user.jobs, include: '**'
       }
     else
       render json: {error: 'No id present on headers'}, status: 404
