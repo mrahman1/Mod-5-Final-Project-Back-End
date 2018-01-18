@@ -15,7 +15,19 @@ class ApplicationsController < ApplicationController
 
   # POST /applications
   def create
-    @application = Application.new(application_params)
+    @candidate = Candidate.find_by(id: params[:candidate_id])
+
+      if !@candidate
+        @candidate = Candidate.create(
+          name: candidate_params[:candidate_name],
+          user_id: params[:user_id]
+        )
+      end
+
+    @application = Application.new(
+      candidate_id: @candidate.id,
+      job_id: params[:job_id]
+    )
 
     if @application.save
       render json: @application, status: :created, location: @application
@@ -45,7 +57,11 @@ class ApplicationsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def application_params
-      params.require(:application).permit(:job_id, :candidate_id)
+    # def application_params
+    #   params.require(:application).permit(:job_id, :candidate_id)
+    # end
+    #
+    def candidate_params
+      params.permit(:candidate_name)
     end
 end
