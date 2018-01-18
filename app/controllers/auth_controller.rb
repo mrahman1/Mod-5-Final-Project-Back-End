@@ -8,29 +8,18 @@ class AuthController < ApplicationController
 
     elsif user.authenticate(params[:password])
 
-      # render json: {
-      #   email: user.email,
-      #   id: user.id,
-      #   jwt: issue_token(user.id),
-      #   candidates: user.candidates,
-      #   jobs: user.jobs, include: '**'
-      # }
 
       render json: {
         email: user.email,
         id: user.id,
         jwt: issue_token(user.id),
-        candidates: user.candidates,
-        jobs:
-          user.jobs.map do |job|
-            JobSerializer.new(job)
-          end
+        candidates:  user.candidates.map do |candidate|
+            CandidateSerializer.new(candidate)
+          end,
+        jobs: user.jobs
       }
 
-      # render json: {
-      #   jwt: issue_token(user.id),
-      #   user: UserSerializer.new(user)
-      # }
+
     else
       render json: {error: 'Password is invalid'}, status: 401
     end
@@ -39,25 +28,16 @@ class AuthController < ApplicationController
   def show
     #byebug
     if current_user
-      # render json: {
-      #   id: current_user.id,
-      #   email: current_user.email,
-      #   candidates: current_user.candidates,
-      #   jobs: current_user.jobs, include: '**'
-      # }
-      # render json: {
-      #   jwt: issue_token(current_user.id),
-      #   user: UserSerializer.new(current_user)
-      # }
+
       render json: {
         email: current_user.email,
         id: current_user.id,
         jwt: issue_token(current_user.id),
-        candidates: current_user.candidates,
+        candidates: current_user.candidates.map do |candidate|
+            CandidateSerializer.new(candidate)
+          end,
         jobs:
-          current_user.jobs.map do |job|
-            JobSerializer.new(job)
-          end
+          current_user.jobs
       }
     else
       render json: {error: 'No id present on headers'}, status: 404
