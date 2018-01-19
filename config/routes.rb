@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :companies
   post '/auth', to: 'auth#create'
   get '/current_user', to: 'auth#show'
+  post '/signup', to: 'auth#signup'
   post '/newApp', to: 'users#newApp'
 end

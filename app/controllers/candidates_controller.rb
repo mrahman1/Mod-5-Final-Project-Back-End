@@ -15,10 +15,12 @@ class CandidatesController < ApplicationController
 
   # POST /candidates
   def create
+    @user = User.find_by(id: params[:user_id])
+
     @candidate = Candidate.new(candidate_params)
 
     if @candidate.save
-      render json: @candidate, status: :created, location: @candidate
+      render json: @user, status: :created, location: @user
     else
       render json: @candidate.errors, status: :unprocessable_entity
     end

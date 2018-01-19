@@ -15,6 +15,7 @@ class JobsController < ApplicationController
 
   # POST /jobs
   def create
+  
     @job = Job.new(job_params)
     current_user.jobs << @job
 

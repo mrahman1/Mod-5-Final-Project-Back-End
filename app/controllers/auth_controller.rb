@@ -1,5 +1,27 @@
 class AuthController < ApplicationController
 
+  def signup
+    user = User.find_by(email: params[:email])
+    if user
+      render json: {error: 'User already exists'}, status: 401
+    else
+      user = User.create(email: params[:email], password: params[:password], company_id: params[:company_id])
+
+      render json: {
+        email: user.email,
+        id: user.id,
+        jwt: issue_token(user.id),
+        candidates:  user.candidates.map do |candidate|
+            CandidateSerializer.new(candidate)
+          end,
+        jobs: user.jobs
+      }
+    end
+
+  end
+
+
+
   def create
     user = User.find_by(email: params[:email])
 

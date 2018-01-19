@@ -15,6 +15,7 @@ class ApplicationsController < ApplicationController
 
   # POST /applications
   def create
+    @user = User.find_by(id: params[:user_id])
     @candidate = Candidate.find_by(id: params[:candidate_id])
 
       if !@candidate
@@ -30,10 +31,16 @@ class ApplicationsController < ApplicationController
     )
 
     if @application.save
-      render json: @application, status: :created, location: @application
+      render json: @user
     else
       render json: @application.errors, status: :unprocessable_entity
     end
+
+    # if @application.save
+    #   render json: @application, status: :created, location: @application
+    # else
+    #   render json: @application.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /applications/1
