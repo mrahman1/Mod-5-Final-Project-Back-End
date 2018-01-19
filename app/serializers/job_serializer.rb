@@ -1,5 +1,5 @@
 class JobSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title, :description
   # belongs_to :user
   has_many :applications, :dependent => :destroy
   # has_many :candidates, through: :applications
