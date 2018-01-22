@@ -41,7 +41,9 @@ class AuthController < ApplicationController
         jobs: user.jobs.map do |job|
           JobSerializer.new(job)
         end,
-        applications: user.applications
+        applications: user.applications.map do |application|
+          ApplicationSerializer.new(application)
+        end
       }
 
 
@@ -65,8 +67,9 @@ class AuthController < ApplicationController
           current_user.jobs.map do |job|
             JobSerializer.new(job)
           end,
-        applications: current_user.applications
-
+          applications: current_user.applications.map do |application|
+            ApplicationSerializer.new(application)
+          end
       }
     else
       render json: {error: 'No id present on headers'}, status: 404

@@ -5,7 +5,7 @@ class ApplicationsController < ApplicationController
   def index
     @applications = Application.all
 
-    render json: @applications
+    render json: @applications, include: [:candidate]
   end
 
   # GET /applications/1
@@ -15,6 +15,7 @@ class ApplicationsController < ApplicationController
 
   # POST /applications
   def create
+    #debugger;
     @user = User.find_by(id: params[:user_id])
     @candidate = Candidate.find_by(id: params[:candidate_id])
 
@@ -27,7 +28,8 @@ class ApplicationsController < ApplicationController
 
     @application = Application.new(
       candidate_id: @candidate.id,
-      job_id: params[:job_id]
+      job_id: params[:job_id],
+      stage_id: params[:stage_id]
     )
 
     if @application.save
@@ -45,12 +47,13 @@ class ApplicationsController < ApplicationController
 
   # PATCH/PUT /applications/1
   def update
-    if @application.update(application_params)
+    if @application.update(stage_id: params[:stage_id])
       render json: @application
     else
       render json: @application.errors, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /applications/1
   def destroy
@@ -71,4 +74,6 @@ class ApplicationsController < ApplicationController
     def candidate_params
       params.permit(:candidate_name)
     end
+
+
 end
