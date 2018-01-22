@@ -7,8 +7,18 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Companies = Company.create([{name: Faker::Company.name},{name: Faker::Company.name}])
-Jobs = Job.create([{title: Faker::Job.title, user_id: 1, description: Faker::Job.field},{title: Faker::Job.title, user_id: 2, description: Faker::Job.field}])
-Candidates = Candidate.create([{name:Faker::Name.name, user_id: 2}, {name:Faker::Name.name, user_id: 1}, {name:Faker::Name.name, user_id: 3}])
+Jobs = Job.create([
+  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'incomplete'},
+  {title: Faker::Job.title, user_id: 2, description: Faker::Lorem.paragraph, status: 'filled'},
+  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'incomplete'},
+  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'filled'}
+  ])
+
+Candidates = Candidate.create([
+  {name:Faker::Name.name, user_id: 2, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, education: Faker::University.name},
+  {name:Faker::Name.name, user_id: 1, phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, education: Faker::University.name},
+  {email: Faker::Internet.email, name:Faker::Name.name, user_id: 3, phone: Faker::PhoneNumber.phone_number, education: Faker::University.name}
+  ])
 Applications = Application.create([{job_id: 1, candidate_id: 1},{job_id: 2, candidate_id:2},{job_id: 3, candidate_id: 3}])
 Stages = Stage.create([{name: "interview"}, {name: "pre-screen"}, {name: "consider"}])
 JobStages = JobStage.create([{job_id: 1, stage_id: 1}, {job_id: 2, stage_id: 1}, {job_id: 3, stage_id: 3}, {job_id: 3, stage_id: 2}, {job_id: 3, stage_id: 1}])
@@ -25,4 +35,3 @@ Application.create(
 
 User.create({email: 'test', password: 'test', company_id: 1})
 Candidate.create({name: 'test candidate', user_id: 3})
-Job.create({user_id: 3, title: 'test-job'})

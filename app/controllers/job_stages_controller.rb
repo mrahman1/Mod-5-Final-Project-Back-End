@@ -15,14 +15,25 @@ class JobStagesController < ApplicationController
 
   # POST /job_stages
   def create
-    @job_stage = JobStage.new(job_stage_params)
+    @stage = Stage.find_by(id: params[:stage_id])
 
+    if !@stage
+      @stage = Stage.create(name: stage_params[:stage_name])
+    end
+
+    @job_stage = JobStage.new(
+      job_id: params[:job_id],
+      stage_id: @stage.id
+    )
+
+    @user = User.find_by(id: user_params[:user_id])
     if @job_stage.save
-      render json: @job_stage, status: :created, location: @job_stage
+      render json: @user
     else
       render json: @job_stage.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /job_stages/1
   def update
@@ -48,4 +59,13 @@ class JobStagesController < ApplicationController
     def job_stage_params
       params.require(:job_stage).permit(:job_id, :stage_id)
     end
+
+    def stage_params
+      params.permit(:stage_name)
+    end
+
+    def user_params
+      params.permit(:user_id)
+    end
+
 end

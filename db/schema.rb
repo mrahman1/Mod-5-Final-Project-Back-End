@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109201751) do
+ActiveRecord::Schema.define(version: 20180122173954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20180109201751) do
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
+    t.integer "stage_id"
     t.index ["candidate_id"], name: "index_applications_on_candidate_id"
     t.index ["job_id"], name: "index_applications_on_job_id"
   end
@@ -27,6 +29,9 @@ ActiveRecord::Schema.define(version: 20180109201751) do
   create_table "candidates", force: :cascade do |t|
     t.bigint "user_id"
     t.text "name"
+    t.text "email"
+    t.integer "phone"
+    t.text "education"
     t.text "link_to_resume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180109201751) do
     t.bigint "user_id"
     t.text "title"
     t.text "description"
+    t.text "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_jobs_on_user_id"

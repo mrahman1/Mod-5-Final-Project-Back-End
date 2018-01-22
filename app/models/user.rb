@@ -3,4 +3,5 @@ class User < ApplicationRecord
   belongs_to :company
   has_many :jobs
   has_many :candidates
+  has_many :applications, through: :jobs
 end

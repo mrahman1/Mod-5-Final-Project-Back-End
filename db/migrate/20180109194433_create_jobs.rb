@@ -4,6 +4,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.text :title
       t.text :description
+      t.text :status
       t.timestamps
     end
   end
