@@ -28,11 +28,12 @@ ActiveRecord::Schema.define(version: 20180122173954) do
 
   create_table "candidates", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "name"
-    t.text "email"
+    t.string "name"
+    t.string "email"
     t.integer "phone"
     t.text "education"
     t.text "link_to_resume"
+    t.text "work_experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_candidates_on_user_id"
@@ -55,9 +56,14 @@ ActiveRecord::Schema.define(version: 20180122173954) do
 
   create_table "jobs", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "title"
+    t.string "title"
     t.text "description"
-    t.text "status"
+    t.string "status"
+    t.string "employment_type"
+    t.string "position"
+    t.string "field"
+    t.text "skills"
+    t.string "education_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_jobs_on_user_id"

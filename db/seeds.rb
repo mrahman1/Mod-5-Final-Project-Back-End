@@ -1,32 +1,67 @@
 
-Companies = Company.create([{name: Faker::Company.name},{name: Faker::Company.name}])
-Jobs = Job.create([
-  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'incomplete'},
-  {title: Faker::Job.title, user_id: 2, description: Faker::Lorem.paragraph, status: 'filled'},
-  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'incomplete'},
-  {title: Faker::Job.title, user_id: 1, description: Faker::Lorem.paragraph, status: 'filled'}
+Companies = Company.create([
+  {name: Faker::Company.name},
+  {name: Faker::Company.name},
+  {name: Faker::Company.name}
   ])
 
-Candidates = Candidate.create([
-  {name:Faker::Name.name, user_id: 2, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, education: Faker::University.name},
-  {name:Faker::Name.name, user_id: 1, phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, education: Faker::University.name},
-  {email: Faker::Internet.email, name:Faker::Name.name, user_id: 3, phone: Faker::PhoneNumber.phone_number, education: Faker::University.name}
+  Users = User.create([
+    {email: 'mimi@test.com', password: 'test', company_id: 1},
+    {email:Faker::Internet.email, company_id: 1, password: "cheese"},
+    {email:Faker::Internet.email, company_id: 2, password: "cheese"},
+    {email:Faker::Internet.email, company_id: 3,password: "cheese"}
   ])
 
-Applications = Application.create([{job_id: 1, candidate_id: 1, stage_id: 1},{job_id: 2, candidate_id:2, stage_id: 1},{job_id: 3, candidate_id: 3, stage_id: 1}])
-Stages = Stage.create([{name: "pre-screen"}, {name: "reject"}, {name: "interview"}, {name: "consider"}])
-JobStages = JobStage.create([{job_id: 1, stage_id: 1}, {job_id: 2, stage_id: 1}, {job_id: 3, stage_id: 3}, {job_id: 3, stage_id: 2}, {job_id: 3, stage_id: 1}])
-Users = User.create([{email:Faker::Internet.email, company_id: 1, password: "cheese"},{email:Faker::Internet.email, company_id: 2, password: "cheese"},{email:Faker::Internet.email, company_id: 3,password: "cheese"}])
+15.times do
+  Job.create(
+    title: Faker::Job.title,
+    user_id: 1,
+    description: Faker::Lorem.paragraph,
+    position: Faker::Job.field,
+    skills: "#{Faker::Job.key_skill}, #{Faker::Job.key_skill}, #{Faker::Job.key_skill}", employment_type: "Full Time",
+    education_level: "Bachelor",
+    field: Faker::Job.field,
+    status: 'incomplete'
+  )
+end
 
-Application.create(
-  job_id:
-    Job.create(
+20.times do
+  Candidate.create(
+      name:Faker::Name.name,
       user_id: 1,
-      title: Faker::Job.title
-    ).id,
-   candidate_id: Candidate.create({name:Faker::Name.name, user_id: 1}).id,
-   stage_id: 1
-)
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      education: Faker::University.name,
+      work_experience: "#{Faker::Job.title}, #{Faker::Date.between(1.year.ago, Date.today)}, #{Faker::Job.title}, #{Faker::Date.between(1.year.ago, Date.today)}, #{Faker::Job.title}, #{Faker::Date.between(1.year.ago, Date.today)}"
+  )
+end
 
-User.create({email: 'test', password: 'test', company_id: 1})
-Candidate.create({name: 'test candidate', user_id: 3})
+Applications = Application.create([
+  {job_id: 1, candidate_id: 1, stage_id: 1},
+  {job_id: 2, candidate_id: 2, stage_id: 1},
+  {job_id: 3, candidate_id: 3, stage_id: 1},
+  {job_id: 4, candidate_id: 4, stage_id: 1},
+  {job_id: 5, candidate_id: 5, stage_id: 1},
+  {job_id: 6, candidate_id: 6, stage_id: 1},
+  {job_id: 7, candidate_id: 1, stage_id: 1},
+  {job_id: 8, candidate_id: 3, stage_id: 1},
+  {job_id: 9, candidate_id: 2, stage_id: 1},
+  ])
+
+15.times do
+  Application.create(job_id: 1, candidate_id: 1, stage_id: 1)
+end
+
+Stages = Stage.create([
+  {name: "reject"},
+  {name: "pre-screen"},
+  {name: "interview"},
+  {name: "consider"}])
+
+JobStages = JobStage.create([
+  {job_id: 1, stage_id: 1},
+  {job_id: 2, stage_id: 2},
+  {job_id: 3, stage_id: 3},
+  {job_id: 3, stage_id: 4},
+  {job_id: 3, stage_id: 1}
+])

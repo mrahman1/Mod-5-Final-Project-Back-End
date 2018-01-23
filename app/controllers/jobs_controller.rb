@@ -17,7 +17,7 @@ class JobsController < ApplicationController
   def create
 
     @job = Job.new(job_params)
-    @job.stages.push(Stage.find(1))
+    @job.stages.push(Stage.find(1), Stage.find(2))
     current_user.jobs << @job
 
 
