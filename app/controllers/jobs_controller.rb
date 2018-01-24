@@ -31,7 +31,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   def update
     if @job.update(job_params)
-      render json: @job
+      render json: @job, include: [:employment_type, :education_level]
     else
       render json: @job.errors, status: :unprocessable_entity
     end
@@ -50,6 +50,6 @@ class JobsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:user_id, :title, :description, :stages)
+      params.require(:job).permit(:user_id, :title, :description, :stages, :education_level, :employment_type, :field, :skills, :status)
     end
 end
