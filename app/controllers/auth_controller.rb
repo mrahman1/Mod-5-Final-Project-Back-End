@@ -14,7 +14,9 @@ class AuthController < ApplicationController
         candidates:  user.candidates.map do |candidate|
             CandidateSerializer.new(candidate)
           end,
-        jobs: user.jobs
+        jobs: user.jobs.map do |job|
+          JobSerializer.new(job)
+        end
       }
     end
 

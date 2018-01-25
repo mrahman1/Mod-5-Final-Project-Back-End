@@ -12,6 +12,12 @@ Companies = Company.create([
     {email:Faker::Internet.email, company_id: 3,password: "cheese"}
   ])
 
+Stages = Stage.create([
+  {name: "reject"},
+  {name: "pre-screen"},
+  {name: "interview"},
+  {name: "consider"}])
+
 15.times do
   Job.create(
     title: Faker::Job.title,
@@ -21,7 +27,8 @@ Companies = Company.create([
     skills: "#{Faker::Job.key_skill}, #{Faker::Job.key_skill}, #{Faker::Job.key_skill}", employment_type: "Full Time",
     education_level: "Bachelor",
     field: Faker::Job.field,
-    status: 'incomplete'
+    status: 'incomplete',
+    job_stages: [JobStage.create(stage_id: 1), JobStage.create(stage_id: 2)]
   )
 end
 
@@ -52,11 +59,7 @@ Applications = Application.create([
   Application.create(job_id: 1, candidate_id: 1, stage_id: 1)
 end
 
-Stages = Stage.create([
-  {name: "reject"},
-  {name: "pre-screen"},
-  {name: "interview"},
-  {name: "consider"}])
+
 
 JobStages = JobStage.create([
   {job_id: 1, stage_id: 1},
