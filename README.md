@@ -25,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 <ol>
   <li> Clone back-end from this repo: https://github.com/mrahman1/Mod-5-Final-Project-Back-End </li>
   <li> Connect back end to Postgres </li>
-  <li> Clone front end from this repo: https://github.com/mrahman1/Mod-5-Final-Project-Front-End
+  <li> Clone front end from this repo: https://github.com/mrahman1/Mod-5-Final-Project-Front-End </li>
   <li> Install any missing React/Redux/React-Redux packages / libraries </li>
   </ol>
 
