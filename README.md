@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
   <li> PostgreSQL: https://www.postgresql.org/ </li>
   <li> Yarn Package Manager: https://yarnpkg.com/en/ </li>
   <li> React: https://reactjs.org/ </li>
-  <li> Redux: https://redux.js.org/ <li>
+  <li> Redux: https://redux.js.org/ </li>
   <li> React-Redux: https://github.com/reactjs/react-redux </li>
  </ul> 
 
